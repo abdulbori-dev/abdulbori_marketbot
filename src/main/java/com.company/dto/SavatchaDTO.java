@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 public class SavatchaDTO {
 
     private Integer id;
-    private Integer userId;
+    private Long userId;
     private Integer productId;
     private LocalDateTime createdDate;
 }

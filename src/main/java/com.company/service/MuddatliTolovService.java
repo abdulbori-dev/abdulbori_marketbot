@@ -20,7 +20,7 @@ public class MuddatliTolovService {
         System.out.println("Success");
     }
 
-    public MuddatliTolovDTO getByUserIdAndProductId(Integer id, Integer productId) {
+    public MuddatliTolovDTO getByUserIdAndProductId(Long id, Integer productId) {
         List<MuddatliTolovDTO> muddatliTolovList = muddatliTolovRepository.getByProfileIdAndProductId(id, productId);
 
         for (MuddatliTolovDTO muddatliTolov : muddatliTolovList) {
@@ -30,27 +30,32 @@ public class MuddatliTolovService {
         return null;
     }
 
-    public void updateTypeByUserIdAndProductId(String type, Integer userId, Integer productId) {
+    public void updateTypeByUserIdAndProductId(String type, Long userId, Integer productId) {
         muddatliTolovRepository.updateTypeByUserIdAndProductId(type, userId, productId);
 
         System.out.println("Success");
     }
 
-    public void updatePriceByUserIdAndProductId(Integer price, Integer userId, Integer productId) {
+    public void updatePriceByUserIdAndProductId(Integer price, Long userId, Integer productId) {
         muddatliTolovRepository.updatePriceByUserIdAndProductId(price, userId, productId);
 
         System.out.println("Success");
     }
 
-    public void updateStatusByUserIdAndProductId(String status, Integer userId, Integer productId) {
-        muddatliTolovRepository.updateStatusByUserIdAndProductId(status, userId, productId);
+    public void updateStatusByUserId(String status, Long userId) {
+        muddatliTolovRepository.updateStatusByUserId(status, userId);
 
         System.out.println("Success");
     }
 
-    public void deleteMuddatliTolov(Integer userId, Integer productId) {
+    public void deleteMuddatliTolov(Long userId, Integer productId) {
         muddatliTolovRepository.deleteMuddatliTolov(userId, productId);
 
         System.out.println("Success");
+    }
+
+    public MuddatliTolovDTO getByProfileId(Long id) {
+
+        return muddatliTolovRepository.getByProfileId(id);
     }
 }

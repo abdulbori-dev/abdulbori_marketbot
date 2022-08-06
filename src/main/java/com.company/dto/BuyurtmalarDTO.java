@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class BuyurtmalarDTO {
 
     private Integer id;
-    private Integer userId;
+    private Long userId;
     private BuyurtmalarStatus status;
     private Integer productId;
     private LocalDateTime createdDate;

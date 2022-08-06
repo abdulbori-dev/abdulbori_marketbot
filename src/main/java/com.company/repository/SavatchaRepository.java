@@ -28,7 +28,7 @@ public class SavatchaRepository {
         jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection
                     .prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, dto.getUserId());
+            ps.setLong(1, dto.getUserId());
             ps.setInt(2, dto.getProductId());
             return ps;
         }, keyHolder);
@@ -36,13 +36,13 @@ public class SavatchaRepository {
         return (Integer) keyHolder.getKeys().get("id");
     }
 
-    public List<SavatchaDTO> getAllByUserId(Integer userId) {
-        String sql = "Select * from savatcha where userId = " + "'" + userId + "'";
+    public List<SavatchaDTO> getAllByUserId(Long userId) {
+        String sql = "Select * from savatcha where userId = " + userId;
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(SavatchaDTO.class));
     }
 
-    public boolean deleteSavatcha(Integer userId) {
-        String sql = "delete from savatcha where userId = " + "'" + userId + "'";
+    public boolean deleteSavatcha(Long userId) {
+        String sql = "delete from savatcha where userId = " + userId;
         int n = jdbcTemplate.update(sql);
         return n > 0;
     }

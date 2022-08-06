@@ -1,6 +1,7 @@
 package com.company.service;
 
 import com.company.dto.BuyurtmalarDTO;
+import com.company.dto.UserDetailDTO;
 import com.company.enums.BuyurtmalarStatus;
 import com.company.repository.BuyurtmalarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class BuyurtmalarService {
         System.out.println("Success");
     }
 
-    public Integer getAllById(Integer productId, Integer userId) {
+    public Integer getAllById(Integer productId, Long userId) {
         List<BuyurtmalarDTO> buyurtmalarList =  buyurtmalarRepository.getAllById(productId, userId);
 
         for (BuyurtmalarDTO buyurtma : buyurtmalarList) {
@@ -29,13 +30,13 @@ public class BuyurtmalarService {
         return null;
     }
 
-    public List<BuyurtmalarDTO> getAllByUserId(Integer userId) {
+    public List<BuyurtmalarDTO> getAllByUserId(Long userId) {
         List<BuyurtmalarDTO> buyurtmalarList =  buyurtmalarRepository.getAllByUserId(userId);
 
         return buyurtmalarList;
     }
 
-    public void updateBuyurtmaStatus(String status, Integer userId, String statusWhere) {
+    public void updateBuyurtmaStatus(String status, Long userId, String statusWhere) {
         buyurtmalarRepository.updateBuyurtmaStatus(status, userId, statusWhere);
 
         System.out.println("Success");

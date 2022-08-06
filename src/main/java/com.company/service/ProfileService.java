@@ -1,5 +1,6 @@
 package com.company.service;
 
+import com.company.dto.CategoryDTO;
 import com.company.dto.ProfileDTO;
 import com.company.repository.ProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,44 +21,79 @@ public class ProfileService {
         System.out.println("Success");
     }
 
-    public void updateLanguageProfile(Integer id, String language) {
+    public void updateLanguageProfile(Long id, String language) {
         profileRepository.updateLanguageProfile(id, language);
 
         System.out.println("Success");
     }
 
-    public void updatePhoneProfile(Integer id, String phone) {
+    public void updatePhoneProfile(Long id, String phone) {
         profileRepository.updatePhoneProfile(id, phone);
 
         System.out.println("Success");
     }
 
-    public void updateNameProfile(Integer id, String name) {
+    public void updateNameProfile(Long id, String name) {
         profileRepository.updateNameProfile(id, name);
 
         System.out.println("Success");
     }
 
-    public void updateSurnameProfile(Integer id, String surname) {
+    public void updateSurnameProfile(Long id, String surname) {
         profileRepository.updateSurnameProfile(id, surname);
 
         System.out.println("Success");
     }
 
-    public boolean getById(Integer id) {
+    public boolean getById(Long id) {
         return profileRepository.getById(id);
     }
 
-    public String getProfileLanguage(Integer id) {
+    public String getProfileLanguage(Long id) {
         return profileRepository.getProfileLanguage(id);
     }
 
-    public boolean checkPhoneNumber(Integer id) {
+    public boolean checkPhoneNumber(Long id) {
         return profileRepository.checkPhoneNumber(id);
     }
 
-    public ProfileDTO getByProfileId(Integer id) {
+    public ProfileDTO getByProfileId(Long id) {
 
         return profileRepository.getByProfileId(id);
+    }
+
+    public List<ProfileDTO> getByProfileRole(String role) {
+
+        return profileRepository.getByProfileRole(role);
+    }
+
+    public boolean checkRole(String role, Long id) {
+        return profileRepository.checkRole(role, id);
+    }
+
+    public List<ProfileDTO> getAllBy() {
+        return profileRepository.getAll();
+    }
+
+    public void updateRoleProfile(String role, Long id) {
+        profileRepository.updateRoleProfile(role, id);
+
+        System.out.println("Success");
+    }
+
+    public Integer getAllProfileCount() {
+        return profileRepository.getAllProfileCount();
+    }
+
+    public Integer getAllProfileCountCurrentWeek() {
+        return profileRepository.getAllProfileCountCurrentWeek();
+    }
+
+    public Integer getAllProfileCountCurrentDay() {
+        return profileRepository.getAllProfileCountCurrentDay();
+    }
+
+    public Integer getAllProfileCountCurrentMonth() {
+        return profileRepository.getAllProfileCountCurrentMonth();
     }
 }

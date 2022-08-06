@@ -19,13 +19,13 @@ public class SavatchaService {
         System.out.println("Success");
     }
 
-    public List<SavatchaDTO> getAllByUserId(Integer userId) {
+    public List<SavatchaDTO> getAllByUserId(Long userId) {
         List<SavatchaDTO> buyurtmalarList =  savatchaRepository.getAllByUserId(userId);
 
         return buyurtmalarList;
     }
 
-    public void deleteSavatcha(Integer userId) {
+    public void deleteSavatcha(Long userId) {
         savatchaRepository.deleteSavatcha(userId);
 
         System.out.println("Success");

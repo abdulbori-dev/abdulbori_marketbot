@@ -13,7 +13,7 @@ public class MuddatliTolovDTO {
 
     private Integer id;
     private Integer productId;
-    private Integer userId;
+    private Long userId;
     private LocalDateTime createdDate;
     private MuddatliTolovStatus status;
     private MuddatliTolovType type;

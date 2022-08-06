@@ -3,6 +3,7 @@ package com.company.repository;
 import com.company.dto.BuyurtmalarDTO;
 import com.company.dto.ProductDTO;
 import com.company.dto.ProfileDTO;
+import com.company.dto.UserDetailDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -29,7 +30,7 @@ public class BuyurtmalarRepository {
         jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection
                     .prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, dto.getUserId());
+            ps.setLong(1, dto.getUserId());
             ps.setString(2, dto.getStatus().name());
             ps.setInt(3, dto.getProductId());
             ps.setTimestamp(4, Timestamp.valueOf(LocalDateTime.now()));
@@ -39,17 +40,17 @@ public class BuyurtmalarRepository {
         return (Integer) keyHolder.getKeys().get("id");
     }
 
-    public List<BuyurtmalarDTO> getAllById(Integer productId, Integer userId) {
+    public List<BuyurtmalarDTO> getAllById(Integer productId, Long userId) {
         String sql = "Select * from buyurtmalar where userid = " + userId + " and productid = " + productId;
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(BuyurtmalarDTO.class));
     }
 
-    public List<BuyurtmalarDTO> getAllByUserId(Integer userId) {
+    public List<BuyurtmalarDTO> getAllByUserId(Long userId) {
         String sql = "Select * from buyurtmalar where userid = " + userId;
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(BuyurtmalarDTO.class));
     }
 
-    public void updateBuyurtmaStatus(String status, Integer userId, String statusWhere) {
+    public void updateBuyurtmaStatus(String status, Long userId, String statusWhere) {
         String sql = "update buyurtmalar set status = ? where userId = ? and status = ?;";
         jdbcTemplate.update(sql, status, userId, statusWhere);
     }

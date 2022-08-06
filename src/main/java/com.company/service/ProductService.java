@@ -13,8 +13,8 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    public List<ProductDTO> getAllById(Integer id, Integer productCategoryId) {
-       return productRepository.getAllById(id, productCategoryId);
+    public List<ProductDTO> getAllById(String callback) {
+       return productRepository.getAllByProductCategory(callback);
     }
 
     public ProductDTO getProductById(Integer id) {
@@ -25,5 +25,45 @@ public class ProductService {
         }
 
         return null;
+    }
+
+    public boolean checkProductCallBack(Integer id) {
+        return productRepository.checkProductCallBack(id);
+    }
+
+    public void createProfile(ProductDTO product) {
+        productRepository.createProfile(product);
+
+        System.out.println("Success");
+    }
+
+    public void updateTitle(String title) {
+        productRepository.updateTitle(title);
+
+        System.out.println("Success");
+    }
+
+    public void updateDescription(String description) {
+        productRepository.updateDescription(description);
+
+        System.out.println("Success");
+    }
+
+    public void updatePhotoId(String photoId) {
+        productRepository.updatePhotoId(photoId);
+
+        System.out.println("Success");
+    }
+
+    public void updatePrice(Long price) {
+        productRepository.updatePrice(price);
+
+        System.out.println("Success");
+    }
+
+    public void updateProductCategory(Integer productCategoryId) {
+        productRepository.updateProductCategory(productCategoryId);
+
+        System.out.println("Success");
     }
 }

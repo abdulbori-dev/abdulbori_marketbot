@@ -1,17 +1,14 @@
 package com.company.manager;
 
-import com.company.mainBot.MainBot;
-import com.company.mainBot.MuddatliTolovBot;
-import lombok.AllArgsConstructor;
+import com.company.mainBot.user.MainBot;
+import com.company.mainBot.user.MuddatliTolovBot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
-import org.telegram.telegrambots.bots.TelegramWebhookBot;
-import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.*;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
+import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.User;
@@ -45,9 +42,10 @@ public class BotManager extends TelegramLongPollingBot {
 
         if (update.hasCallbackQuery()) {
             User calBackUser = update.getCallbackQuery().getFrom();
+            CallbackQuery callback = update.getCallbackQuery();
             String text = update.getCallbackQuery().getData();
             log(calBackUser, text);
-            mainBot.handlerCallbackQuery(calBackUser, text, update.getCallbackQuery().getMessage().getMessageId());
+            mainBot.handlerCallbackQuery(calBackUser, text, update.getCallbackQuery().getMessage().getMessageId(), callback);
         } else if (message.hasText()) {
             User user = message.getFrom();
             log(user, message.getText());

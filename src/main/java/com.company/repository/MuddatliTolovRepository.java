@@ -1,5 +1,6 @@
 package com.company.repository;
 
+import com.company.dto.BuyurtmalarDTO;
 import com.company.dto.MuddatliTolovDTO;
 import com.company.dto.ProfileDTO;
 import com.company.dto.SavatchaDTO;
@@ -26,7 +27,7 @@ public class MuddatliTolovRepository {
         jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection
                     .prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, dto.getUserId());
+            ps.setLong(1, dto.getUserId());
             ps.setInt(2, dto.getProductId());
             ps.setString(3, dto.getStatus().name());
             return ps;
@@ -35,29 +36,34 @@ public class MuddatliTolovRepository {
         return (Integer) keyHolder.getKeys().get("id");
     }
 
-    public List<MuddatliTolovDTO> getByProfileIdAndProductId(Integer userId, Integer productId) {
+    public List<MuddatliTolovDTO> getByProfileIdAndProductId(Long userId, Integer productId) {
         String sql = "Select * from muddatli_tolov where user_id = " + userId + " and product_id = " + productId;
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(MuddatliTolovDTO.class));
     }
 
-    public void updateTypeByUserIdAndProductId(String type, Integer userId, Integer productId) {
+    public void updateTypeByUserIdAndProductId(String type, Long userId, Integer productId) {
         String sql = "update muddatli_tolov set type=? where user_id=? and product_id=?";
         jdbcTemplate.update(sql, type, userId, productId);
     }
 
-    public void updatePriceByUserIdAndProductId(Integer price, Integer userId, Integer productId) {
+    public void updatePriceByUserIdAndProductId(Integer price, Long userId, Integer productId) {
         String sql = "update muddatli_tolov set price=? where user_id=? and product_id=?";
         jdbcTemplate.update(sql, price, userId, productId);
     }
 
-    public void updateStatusByUserIdAndProductId(String status, Integer userId, Integer productId) {
-        String sql = "update muddatli_tolov set status=? where user_id=? and product_id=?";
-        jdbcTemplate.update(sql, status, userId, productId);
+    public void updateStatusByUserId(String status, Long userId) {
+        String sql = "update muddatli_tolov set status=? where user_id=? and status = 'TASDIQLANMAGAN'";
+        jdbcTemplate.update(sql, status, userId);
     }
 
-    public boolean deleteMuddatliTolov(Integer userId, Integer productId) {
+    public boolean deleteMuddatliTolov(Long userId, Integer productId) {
         String sql = "delete from muddatli_tolov where user_id = " + userId + " and product_id = " + productId;
         int n = jdbcTemplate.update(sql);
         return n > 0;
+    }
+
+    public MuddatliTolovDTO getByProfileId(Long id) {
+        String sql = "select * from muddatli_tolov where user_id=? and status = 'TASDIQLANMAGAN'";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(MuddatliTolovDTO.class), id).get(0);
     }
 }

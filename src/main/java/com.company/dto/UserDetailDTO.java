@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 public class UserDetailDTO {
 
     private Integer id;
-    private Integer userId;
+    private Long userId;
     private String organization;
     private String position;
     private String internship;
